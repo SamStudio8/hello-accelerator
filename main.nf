@@ -1,11 +1,12 @@
 #!/usr/bin/env nextflow
-nextflow.enable.dsl=2 
+nextflow.enable.dsl=2
 
-process sayHello {
-  input: 
+process sayHelloFast {
+  input:
     val x
   output:
     stdout
+  accelerator 1
   script:
     """
     echo '$x world!'
@@ -13,5 +14,5 @@ process sayHello {
 }
 
 workflow {
-  Channel.of('Bonjour', 'Ciao', 'Hello', 'Hola') | sayHello | view
+  Channel.of('Bonjour', 'Ciao', 'Hello', 'Hola') | sayHelloFast | view
 }
